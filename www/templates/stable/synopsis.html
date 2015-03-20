@@ -1,0 +1,17 @@
+<h1 id="synopsis">Synopsis</h1>
+<!--type=misc-->
+<p>An example of a <a href="http.html">web server</a> written with Node which responds with &#39;Hello
+World&#39;:</p>
+<pre><code>var http = require(&#39;http&#39;);
+
+http.createServer(function (request, response) {
+  response.writeHead(200, {&#39;Content-Type&#39;: &#39;text/plain&#39;});
+  response.end(&#39;Hello World\n&#39;);
+}).listen(8124);
+
+console.log(&#39;Server running at http://127.0.0.1:8124/&#39;);
+</code></pre><p>To run the server, put the code into a file called <code>example.js</code> and execute
+it with the node program</p>
+<pre><code>&gt; node example.js
+Server running at http://127.0.0.1:8124/
+</code></pre><p>All of the examples in the documentation can be run similarly.</p>

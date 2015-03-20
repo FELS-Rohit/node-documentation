@@ -1,0 +1,48 @@
+<h1 id="tty">TTY</h1>
+<pre><code>Stability: 2 - Unstable
+</code></pre><p>The <code>tty</code> module houses the <code>tty.ReadStream</code> and <code>tty.WriteStream</code> classes. In
+most cases, you will not need to use this module directly.</p>
+<p>When node detects that it is being run inside a TTY context, then <code>process.stdin</code>
+will be a <code>tty.ReadStream</code> instance and <code>process.stdout</code> will be
+a <code>tty.WriteStream</code> instance. The preferred way to check if node is being run in
+a TTY context is to check <code>process.stdout.isTTY</code>:</p>
+<pre><code>$ node -p -e &quot;Boolean(process.stdout.isTTY)&quot;
+true
+$ node -p -e &quot;Boolean(process.stdout.isTTY)&quot; | cat
+false
+</code></pre><h2 id="tty-isatty-fd-">tty.isatty(fd)</h2>
+<p>Returns <code>true</code> or <code>false</code> depending on if the <code>fd</code> is associated with a
+terminal.</p>
+<h2 id="tty-setrawmode-mode-">tty.setRawMode(mode)</h2>
+<p>Deprecated. Use <code>tty.ReadStream#setRawMode()</code>
+(i.e. <code>process.stdin.setRawMode()</code>) instead.</p>
+<h2 id="class-readstream">Class: ReadStream</h2>
+<p>A <code>net.Socket</code> subclass that represents the readable portion of a tty. In normal
+circumstances, <code>process.stdin</code> will be the only <code>tty.ReadStream</code> instance in any
+node program (only when <code>isatty(0)</code> is true).</p>
+<h3 id="rs-israw">rs.isRaw</h3>
+<p>A <code>Boolean</code> that is initialized to <code>false</code>. It represents the current &quot;raw&quot; state
+of the <code>tty.ReadStream</code> instance.</p>
+<h3 id="rs-setrawmode-mode-">rs.setRawMode(mode)</h3>
+<p><code>mode</code> should be <code>true</code> or <code>false</code>. This sets the properties of the
+<code>tty.ReadStream</code> to act either as a raw device or default. <code>isRaw</code> will be set
+to the resulting mode.</p>
+<h2 id="class-writestream">Class: WriteStream</h2>
+<p>A <code>net.Socket</code> subclass that represents the writable portion of a tty. In normal
+circumstances, <code>process.stdout</code> will be the only <code>tty.WriteStream</code> instance
+ever created (and only when <code>isatty(1)</code> is true).</p>
+<h3 id="ws-columns">ws.columns</h3>
+<p>A <code>Number</code> that gives the number of columns the TTY currently has. This property
+gets updated on &quot;resize&quot; events.</p>
+<h3 id="ws-rows">ws.rows</h3>
+<p>A <code>Number</code> that gives the number of rows the TTY currently has. This property
+gets updated on &quot;resize&quot; events.</p>
+<h3 id="event-resize-">Event: &#39;resize&#39;</h3>
+<p><code>function () {}</code></p>
+<p>Emitted by <code>refreshSize()</code> when either of the <code>columns</code> or <code>rows</code> properties
+has changed.</p>
+<pre><code>process.stdout.on(&#39;resize&#39;, function() {
+  console.log(&#39;screen size has changed!&#39;);
+  console.log(process.stdout.columns + &#39;x&#39; + process.stdout.rows);
+});
+</code></pre>
