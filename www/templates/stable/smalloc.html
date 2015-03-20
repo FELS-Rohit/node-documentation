@@ -1,0 +1,116 @@
+<h1 id="smalloc">Smalloc</h1>
+<pre><code>Stability: 1 - Experimental
+</code></pre><h2 id="class-smalloc">Class: smalloc</h2>
+<p>Buffers are backed by a simple allocator that only handles the assignation of
+external raw memory. Smalloc exposes that functionality.</p>
+<h3 id="smalloc-alloc-length-receiver-type-">smalloc.alloc(length[, receiver][, type])</h3>
+<ul>
+<li><code>length</code> {Number} <code>&lt;= smalloc.kMaxLength</code></li>
+<li><code>receiver</code> {Object} Default: <code>new Object</code></li>
+<li><code>type</code> {Enum} Default: <code>Uint8</code></li>
+</ul>
+<p>Returns <code>receiver</code> with allocated external array data. If no <code>receiver</code> is
+passed then a new Object will be created and returned.</p>
+<p>This can be used to create your own Buffer-like classes. No other properties are
+set, so the user will need to keep track of other necessary information (e.g.
+<code>length</code> of the allocation).</p>
+<pre><code>function SimpleData(n) {
+  this.length = n;
+  smalloc.alloc(this.length, this);
+}
+
+SimpleData.prototype = { /* ... */ };
+</code></pre><p>It only checks if the <code>receiver</code> is an Object, and also not an Array. Because of
+this it is possible to allocate external array data to more than a plain Object.</p>
+<pre><code>function allocMe() { }
+smalloc.alloc(3, allocMe);
+
+// { [Function allocMe] &#39;0&#39;: 0, &#39;1&#39;: 0, &#39;2&#39;: 0 }
+</code></pre><p>v8 does not support allocating external array data to an Array, and if passed
+will throw.</p>
+<p>It&#39;s possible is to specify the type of external array data you would like. All
+possible options are listed in <code>smalloc.Types</code>. Example usage:</p>
+<pre><code>var doubleArr = smalloc.alloc(3, smalloc.Types.Double);
+
+for (var i = 0; i &lt; 3; i++)
+  doubleArr = i / 10;
+
+// { &#39;0&#39;: 0, &#39;1&#39;: 0.1, &#39;2&#39;: 0.2 }
+</code></pre><p>It is not possible to freeze, seal and prevent extensions of objects with
+external data using <code>Object.freeze</code>, <code>Object.seal</code> and
+<code>Object.preventExtensions</code> respectively.</p>
+<h3 id="smalloc-copyonto-source-sourcestart-dest-deststart-copylength-">smalloc.copyOnto(source, sourceStart, dest, destStart, copyLength);</h3>
+<ul>
+<li><code>source</code> {Object} with external array allocation</li>
+<li><code>sourceStart</code> {Number} Position to begin copying from</li>
+<li><code>dest</code> {Object} with external array allocation</li>
+<li><code>destStart</code> {Number} Position to begin copying onto</li>
+<li><code>copyLength</code> {Number} Length of copy</li>
+</ul>
+<p>Copy memory from one external array allocation to another. No arguments are
+optional, and any violation will throw.</p>
+<pre><code>var a = smalloc.alloc(4);
+var b = smalloc.alloc(4);
+
+for (var i = 0; i &lt; 4; i++) {
+  a[i] = i;
+  b[i] = i * 2;
+}
+
+// { &#39;0&#39;: 0, &#39;1&#39;: 1, &#39;2&#39;: 2, &#39;3&#39;: 3 }
+// { &#39;0&#39;: 0, &#39;1&#39;: 2, &#39;2&#39;: 4, &#39;3&#39;: 6 }
+
+smalloc.copyOnto(b, 2, a, 0, 2);
+
+// { &#39;0&#39;: 4, &#39;1&#39;: 6, &#39;2&#39;: 2, &#39;3&#39;: 3 }
+</code></pre><p><code>copyOnto</code> automatically detects the length of the allocation internally, so no
+need to set any additional properties for this to work.</p>
+<h3 id="smalloc-dispose-obj-">smalloc.dispose(obj)</h3>
+<ul>
+<li><code>obj</code> Object</li>
+</ul>
+<p>Free memory that has been allocated to an object via <code>smalloc.alloc</code>.</p>
+<pre><code>var a = {};
+smalloc.alloc(3, a);
+
+// { &#39;0&#39;: 0, &#39;1&#39;: 0, &#39;2&#39;: 0 }
+
+smalloc.dispose(a);
+
+// {}
+</code></pre><p>This is useful to reduce strain on the garbage collector, but developers must be
+careful. Cryptic errors may arise in applications that are difficult to trace.</p>
+<pre><code>var a = smalloc.alloc(4);
+var b = smalloc.alloc(4);
+
+// perform this somewhere along the line
+smalloc.dispose(b);
+
+// now trying to copy some data out
+smalloc.copyOnto(b, 2, a, 0, 2);
+
+// now results in:
+// RangeError: copy_length &gt; source_length
+</code></pre><p>After <code>dispose()</code> is called object still behaves as one with external data, for
+example <code>smalloc.hasExternalData()</code> returns <code>true</code>.
+<code>dispose()</code> does not support Buffers, and will throw if passed.</p>
+<h3 id="smalloc-hasexternaldata-obj-">smalloc.hasExternalData(obj)</h3>
+<ul>
+<li><code>obj</code> {Object}</li>
+</ul>
+<p>Returns <code>true</code> if the <code>obj</code> has externally allocated memory.</p>
+<h3 id="smalloc-kmaxlength">smalloc.kMaxLength</h3>
+<p>Size of maximum allocation. This is also applicable to Buffer creation.</p>
+<h3 id="smalloc-types">smalloc.Types</h3>
+<p>Enum of possible external array types. Contains:</p>
+<ul>
+<li><code>Int8</code></li>
+<li><code>Uint8</code></li>
+<li><code>Int16</code></li>
+<li><code>Uint16</code></li>
+<li><code>Int32</code></li>
+<li><code>Uint32</code></li>
+<li><code>Float</code></li>
+<li><code>Double</code></li>
+<li><code>Uint8Clamped</code></li>
+</ul>

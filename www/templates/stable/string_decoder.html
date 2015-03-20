@@ -1,0 +1,19 @@
+<h1 id="stringdecoder">StringDecoder</h1>
+<pre><code>Stability: 3 - Stable
+</code></pre><p>To use this module, do <code>require(&#39;string_decoder&#39;)</code>. StringDecoder decodes a
+buffer to a string. It is a simple interface to <code>buffer.toString()</code> but provides
+additional support for utf8.</p>
+<pre><code>var StringDecoder = require(&#39;string_decoder&#39;).StringDecoder;
+var decoder = new StringDecoder(&#39;utf8&#39;);
+
+var cent = new Buffer([0xC2, 0xA2]);
+console.log(decoder.write(cent));
+
+var euro = new Buffer([0xE2, 0x82, 0xAC]);
+console.log(decoder.write(euro));
+</code></pre><h2 id="class-stringdecoder">Class: StringDecoder</h2>
+<p>Accepts a single argument, <code>encoding</code> which defaults to <code>utf8</code>.</p>
+<h3 id="decoder-write-buffer-">decoder.write(buffer)</h3>
+<p>Returns a decoded string.</p>
+<h3 id="decoder-end-">decoder.end()</h3>
+<p>Returns any trailing bytes that were left in the buffer.</p>

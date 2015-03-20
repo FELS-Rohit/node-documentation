@@ -1,0 +1,43 @@
+<h1 id="timers">Timers</h1>
+<pre><code>Stability: 5 - Locked
+</code></pre><p>All of the timer functions are globals.  You do not need to <code>require()</code>
+this module in order to use them.</p>
+<h2 id="settimeout-callback-delay-arg-">setTimeout(callback, delay[, arg][, ...])</h2>
+<p>To schedule execution of a one-time <code>callback</code> after <code>delay</code> milliseconds. Returns a
+<code>timeoutObject</code> for possible use with <code>clearTimeout()</code>. Optionally you can
+also pass arguments to the callback.</p>
+<p>It is important to note that your callback will probably not be called in exactly
+<code>delay</code> milliseconds - Node.js makes no guarantees about the exact timing of when
+the callback will fire, nor of the ordering things will fire in. The callback will
+be called as close as possible to the time specified.</p>
+<h2 id="cleartimeout-timeoutobject-">clearTimeout(timeoutObject)</h2>
+<p>Prevents a timeout from triggering.</p>
+<h2 id="setinterval-callback-delay-arg-">setInterval(callback, delay[, arg][, ...])</h2>
+<p>To schedule the repeated execution of <code>callback</code> every <code>delay</code> milliseconds.
+Returns a <code>intervalObject</code> for possible use with <code>clearInterval()</code>. Optionally
+you can also pass arguments to the callback.</p>
+<h2 id="clearinterval-intervalobject-">clearInterval(intervalObject)</h2>
+<p>Stops an interval from triggering.</p>
+<h2 id="unref-">unref()</h2>
+<p>The opaque value returned by <code>setTimeout</code> and <code>setInterval</code> also has the method
+<code>timer.unref()</code> which will allow you to create a timer that is active but if
+it is the only item left in the event loop won&#39;t keep the program running.
+If the timer is already <code>unref</code>d calling <code>unref</code> again will have no effect.</p>
+<p>In the case of <code>setTimeout</code> when you <code>unref</code> you create a separate timer that
+will wakeup the event loop, creating too many of these may adversely effect
+event loop performance -- use wisely.</p>
+<h2 id="ref-">ref()</h2>
+<p>If you had previously <code>unref()</code>d a timer you can call <code>ref()</code> to explicitly
+request the timer hold the program open. If the timer is already <code>ref</code>d calling
+<code>ref</code> again will have no effect.</p>
+<h2 id="setimmediate-callback-arg-">setImmediate(callback[, arg][, ...])</h2>
+<p>To schedule the &quot;immediate&quot; execution of <code>callback</code> after I/O events
+callbacks and before <code>setTimeout</code> and <code>setInterval</code> . Returns an
+<code>immediateObject</code> for possible use with <code>clearImmediate()</code>. Optionally you
+can also pass arguments to the callback.</p>
+<p>Callbacks for immediates are queued in the order in which they were created.
+The entire callback queue is processed every event loop iteration. If you queue
+an immediate from inside an executing callback, that immediate won&#39;t fire
+until the next event loop iteration.</p>
+<h2 id="clearimmediate-immediateobject-">clearImmediate(immediateObject)</h2>
+<p>Stops an immediate from triggering.</p>
