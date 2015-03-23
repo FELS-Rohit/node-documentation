@@ -19,7 +19,8 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.console",
+    "com.ionic.keyboard",
     "org.apache.cordova.device",
-    "com.ionic.keyboard"
+    "org.apache.cordova.statusbar"
   ]
 }

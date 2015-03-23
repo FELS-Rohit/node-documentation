@@ -66,6 +66,7 @@
         <param name="id" value="org.apache.cordova.console" />
     </feature>
     <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
         <param name="id" value="org.apache.cordova.device" />
     </feature>
     <feature name="Keyboard">
