@@ -82,4 +82,7 @@
     <feature name="Network Information">
         <param name="id" value="org.apache.cordova.network-information" />
     </feature>
+    <feature name="AdMob">
+        <param name="id" value="com.rjfun.cordova.plugin.admob" />
+    </feature>
 </widget>

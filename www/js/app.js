@@ -27,6 +27,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     //}
 
     if (window.Connection) {
+
       if (navigator.connection.type !== Connection.NONE) {
         if (window.plugins && window.plugins.AdMob) {
           var admob_key = device.platform == 'Android' ? 'ca-app-pub-2015513932539714/8188095420' : 'IOS_PUBLISHER_KEY';
@@ -34,7 +35,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           admob.createBannerView(
             {
               'publisherId': admob_key,
-              'adSize': admob.AD_SIZE.INTERSTITIAL,
+              'adSize': admob.AD_SIZE.BANNER,
               'bannerAtTop': false
             },
             function() {
