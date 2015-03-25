@@ -1,12 +1,12 @@
 'use strict';
 
-var versionStable = '0.12.0';
+var versionStable = '0.12.1';
 
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     clean: [
-      './dest/ionic/'
+      './www/templates/stable/'
     ],
     //ionic version
     ionic: {
