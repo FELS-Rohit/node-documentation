@@ -2,7 +2,7 @@
 <widget id="com.mc.nad.pro" version="0.12.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Node.js Documentation Pro</name>
   <description>Node.js Manual and Documentation Offline</description>
-  <author email="info@mcnallydevelopers.com" href="http://www.mcnallydevelopers.com/">    McNally Developers  </author>
+  <author email="info@dak42.com" href="http://dak42.github.io/node-documentation/">dak42</author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
