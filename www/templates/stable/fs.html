@@ -20,7 +20,7 @@ fs.unlink(&#39;/tmp/hello&#39;, function (err) {
 </code></pre><p>Here is the synchronous version:</p>
 <pre><code>var fs = require(&#39;fs&#39;);
 
-fs.unlinkSync(&#39;/tmp/hello&#39;)
+fs.unlinkSync(&#39;/tmp/hello&#39;);
 console.log(&#39;successfully deleted /tmp/hello&#39;);
 </code></pre><p>With the asynchronous methods there is no guaranteed ordering. So the
 following is prone to error:</p>
@@ -70,48 +70,49 @@ Error: EISDIR, read
 <p>Asynchronous rename(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-renamesync-oldpath-newpath-">fs.renameSync(oldPath, newPath)</h2>
-<p>Synchronous rename(2).</p>
+<p>Synchronous rename(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-ftruncate-fd-len-callback-">fs.ftruncate(fd, len, callback)</h2>
 <p>Asynchronous ftruncate(2). No arguments other than a possible exception are
 given to the completion callback.</p>
 <h2 id="fs-ftruncatesync-fd-len-">fs.ftruncateSync(fd, len)</h2>
-<p>Synchronous ftruncate(2).</p>
+<p>Synchronous ftruncate(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-truncate-path-len-callback-">fs.truncate(path, len, callback)</h2>
 <p>Asynchronous truncate(2). No arguments other than a possible exception are
-given to the completion callback.</p>
+given to the completion callback. A file descriptor can also be passed as the
+first argument. In this case, <code>fs.ftruncate()</code> is called.</p>
 <h2 id="fs-truncatesync-path-len-">fs.truncateSync(path, len)</h2>
-<p>Synchronous truncate(2).</p>
+<p>Synchronous truncate(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-chown-path-uid-gid-callback-">fs.chown(path, uid, gid, callback)</h2>
 <p>Asynchronous chown(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-chownsync-path-uid-gid-">fs.chownSync(path, uid, gid)</h2>
-<p>Synchronous chown(2).</p>
+<p>Synchronous chown(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-fchown-fd-uid-gid-callback-">fs.fchown(fd, uid, gid, callback)</h2>
 <p>Asynchronous fchown(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-fchownsync-fd-uid-gid-">fs.fchownSync(fd, uid, gid)</h2>
-<p>Synchronous fchown(2).</p>
+<p>Synchronous fchown(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-lchown-path-uid-gid-callback-">fs.lchown(path, uid, gid, callback)</h2>
 <p>Asynchronous lchown(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-lchownsync-path-uid-gid-">fs.lchownSync(path, uid, gid)</h2>
-<p>Synchronous lchown(2).</p>
+<p>Synchronous lchown(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-chmod-path-mode-callback-">fs.chmod(path, mode, callback)</h2>
 <p>Asynchronous chmod(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-chmodsync-path-mode-">fs.chmodSync(path, mode)</h2>
-<p>Synchronous chmod(2).</p>
+<p>Synchronous chmod(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-fchmod-fd-mode-callback-">fs.fchmod(fd, mode, callback)</h2>
 <p>Asynchronous fchmod(2). No arguments other than a possible exception
 are given to the completion callback.</p>
 <h2 id="fs-fchmodsync-fd-mode-">fs.fchmodSync(fd, mode)</h2>
-<p>Synchronous fchmod(2).</p>
+<p>Synchronous fchmod(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-lchmod-path-mode-callback-">fs.lchmod(path, mode, callback)</h2>
 <p>Asynchronous lchmod(2). No arguments other than a possible exception
 are given to the completion callback.</p>
 <p>Only available on Mac OS X.</p>
 <h2 id="fs-lchmodsync-path-mode-">fs.lchmodSync(path, mode)</h2>
-<p>Synchronous lchmod(2).</p>
+<p>Synchronous lchmod(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-stat-path-callback-">fs.stat(path, callback)</h2>
 <p>Asynchronous stat(2). The callback gets two arguments <code>(err, stats)</code> where
 <code>stats</code> is a <a href="#fs_class_fs_stats">fs.Stats</a> object.  See the <a href="#fs_class_fs_stats">fs.Stats</a>
@@ -135,7 +136,7 @@ the file to be stat-ed is specified by the file descriptor <code>fd</code>.</p>
 <p>Asynchronous link(2). No arguments other than a possible exception are given to
 the completion callback.</p>
 <h2 id="fs-linksync-srcpath-dstpath-">fs.linkSync(srcpath, dstpath)</h2>
-<p>Synchronous link(2).</p>
+<p>Synchronous link(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-symlink-srcpath-dstpath-type-callback-">fs.symlink(srcpath, dstpath[, type], callback)</h2>
 <p>Asynchronous symlink(2). No arguments other than a possible exception are given
 to the completion callback.
@@ -144,7 +145,7 @@ is <code>&#39;file&#39;</code>) and is only available on Windows (ignored on oth
 Note that Windows junction points require the destination path to be absolute.  When using
 <code>&#39;junction&#39;</code>, the <code>destination</code> argument will automatically be normalized to absolute path.</p>
 <h2 id="fs-symlinksync-srcpath-dstpath-type-">fs.symlinkSync(srcpath, dstpath[, type])</h2>
-<p>Synchronous symlink(2).</p>
+<p>Synchronous symlink(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-readlink-path-callback-">fs.readlink(path, callback)</h2>
 <p>Asynchronous readlink(2). The callback gets two arguments <code>(err,
 linkString)</code>.</p>
@@ -167,17 +168,17 @@ fs.realpath(&#39;/etc/passwd&#39;, cache, function (err, resolvedPath) {
 <p>Asynchronous unlink(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-unlinksync-path-">fs.unlinkSync(path)</h2>
-<p>Synchronous unlink(2).</p>
+<p>Synchronous unlink(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-rmdir-path-callback-">fs.rmdir(path, callback)</h2>
 <p>Asynchronous rmdir(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-rmdirsync-path-">fs.rmdirSync(path)</h2>
-<p>Synchronous rmdir(2).</p>
+<p>Synchronous rmdir(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-mkdir-path-mode-callback-">fs.mkdir(path[, mode], callback)</h2>
 <p>Asynchronous mkdir(2). No arguments other than a possible exception are given
 to the completion callback. <code>mode</code> defaults to <code>0777</code>.</p>
 <h2 id="fs-mkdirsync-path-mode-">fs.mkdirSync(path[, mode])</h2>
-<p>Synchronous mkdir(2).</p>
+<p>Synchronous mkdir(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-readdir-path-callback-">fs.readdir(path, callback)</h2>
 <p>Asynchronous readdir(3).  Reads the contents of a directory.
 The callback gets two arguments <code>(err, files)</code> where <code>files</code> is an array of
@@ -189,7 +190,7 @@ the names of the files in the directory excluding <code>&#39;.&#39;</code> and <
 <p>Asynchronous close(2).  No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-closesync-fd-">fs.closeSync(fd)</h2>
-<p>Synchronous close(2).</p>
+<p>Synchronous close(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-open-path-flags-mode-callback-">fs.open(path, flags[, mode], callback)</h2>
 <p>Asynchronous file open. See open(2). <code>flags</code> can be:</p>
 <ul>
@@ -242,19 +243,22 @@ systems.</p>
 The kernel ignores the position argument and always appends the data to
 the end of the file.</p>
 <h2 id="fs-opensync-path-flags-mode-">fs.openSync(path, flags[, mode])</h2>
-<p>Synchronous version of <code>fs.open()</code>.</p>
+<p>Synchronous version of <code>fs.open()</code>. Returns an integer representing the file
+descriptor.</p>
 <h2 id="fs-utimes-path-atime-mtime-callback-">fs.utimes(path, atime, mtime, callback)</h2>
-<h2 id="fs-utimessync-path-atime-mtime-">fs.utimesSync(path, atime, mtime)</h2>
 <p>Change file timestamps of the file referenced by the supplied path.</p>
+<h2 id="fs-utimessync-path-atime-mtime-">fs.utimesSync(path, atime, mtime)</h2>
+<p>Synchronous version of <code>fs.utimes()</code>. Returns <code>undefined</code>.</p>
 <h2 id="fs-futimes-fd-atime-mtime-callback-">fs.futimes(fd, atime, mtime, callback)</h2>
-<h2 id="fs-futimessync-fd-atime-mtime-">fs.futimesSync(fd, atime, mtime)</h2>
 <p>Change the file timestamps of a file referenced by the supplied file
 descriptor.</p>
+<h2 id="fs-futimessync-fd-atime-mtime-">fs.futimesSync(fd, atime, mtime)</h2>
+<p>Synchronous version of <code>fs.futimes()</code>. Returns <code>undefined</code>.</p>
 <h2 id="fs-fsync-fd-callback-">fs.fsync(fd, callback)</h2>
 <p>Asynchronous fsync(2). No arguments other than a possible exception are given
 to the completion callback.</p>
 <h2 id="fs-fsyncsync-fd-">fs.fsyncSync(fd)</h2>
-<p>Synchronous fsync(2).</p>
+<p>Synchronous fsync(2). Returns <code>undefined</code>.</p>
 <h2 id="fs-write-fd-buffer-offset-length-position-callback-">fs.write(fd, buffer, offset, length[, position], callback)</h2>
 <p>Write <code>buffer</code> to the file specified by <code>fd</code>.</p>
 <p><code>offset</code> and <code>length</code> determine the part of the buffer to be written.</p>
@@ -346,7 +350,7 @@ to <code>&#39;utf8&#39;</code>.</p>
   console.log(&#39;It\&#39;s saved!&#39;);
 });
 </code></pre><h2 id="fs-writefilesync-filename-data-options-">fs.writeFileSync(filename, data[, options])</h2>
-<p>The synchronous version of <code>fs.writeFile</code>.</p>
+<p>The synchronous version of <code>fs.writeFile</code>. Returns <code>undefined</code>.</p>
 <h2 id="fs-appendfile-filename-data-options-callback-">fs.appendFile(filename, data[, options], callback)</h2>
 <ul>
 <li><code>filename</code> {String}</li>
@@ -367,7 +371,7 @@ to <code>&#39;utf8&#39;</code>.</p>
   console.log(&#39;The &quot;data to append&quot; was appended to file!&#39;);
 });
 </code></pre><h2 id="fs-appendfilesync-filename-data-options-">fs.appendFileSync(filename, data[, options])</h2>
-<p>The synchronous version of <code>fs.appendFile</code>.</p>
+<p>The synchronous version of <code>fs.appendFile</code>. Returns <code>undefined</code>.</p>
 <h2 id="fs-watchfile-filename-options-listener-">fs.watchFile(filename[, options], listener)</h2>
 <pre><code>Stability: 2 - Unstable.  Use fs.watch instead, if possible.
 </code></pre><p>Watch for changes on <code>filename</code>. The callback <code>listener</code> will be called each
@@ -460,7 +464,8 @@ file between the calls to <code>fs.exists()</code> and <code>fs.open()</code>.  
 and handle the error when it&#39;s not there.</p>
 <p><code>fs.exists()</code> will be deprecated.</p>
 <h2 id="fs-existssync-path-">fs.existsSync(path)</h2>
-<p>Synchronous version of <code>fs.exists</code>.</p>
+<p>Synchronous version of <code>fs.exists()</code>. Returns <code>true</code> if the file exists,
+<code>false</code> otherwise.</p>
 <p><code>fs.existsSync()</code> will be deprecated.</p>
 <h2 id="fs-access-path-mode-callback-">fs.access(path[, mode], callback)</h2>
 <p>Tests a user&#39;s permissions for the file specified by <code>path</code>. <code>mode</code> is an

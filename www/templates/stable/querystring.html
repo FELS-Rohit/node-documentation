@@ -30,8 +30,8 @@ Optionally override the default separator (<code>&#39;&amp;&#39;</code>) and ass
 characters.</p>
 <p>Options object may contain <code>maxKeys</code> property (equal to 1000 by default), it&#39;ll
 be used to limit processed keys. Set it to 0 to remove key count limitation.</p>
-<p>Options object may contain <code>decodeURIComponent</code> property (<code>decodeURIComponent</code> by default),
-it can be used to decode <code>non-utf8</code> encoding string if necessary.</p>
+<p>Options object may contain <code>decodeURIComponent</code> property (<code>querystring.unescape</code> by default),
+it can be used to decode a <code>non-utf8</code> encoding string if necessary.</p>
 <p>Example:</p>
 <pre><code>querystring.parse(&#39;foo=bar&amp;baz=qux&amp;baz=quux&amp;corge&#39;)
 // returns
@@ -49,3 +49,6 @@ provided so that it could be overridden if necessary.</p>
 <h2 id="querystring-unescape">querystring.unescape</h2>
 <p>The unescape function used by <code>querystring.parse</code>,
 provided so that it could be overridden if necessary.</p>
+<p>It will try to use <code>decodeURIComponent</code> in the first place,
+but if that fails it falls back to a safer equivalent that
+doesn&#39;t throw on malformed URLs.</p>
