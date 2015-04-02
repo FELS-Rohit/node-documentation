@@ -28,7 +28,7 @@ smalloc.alloc(3, allocMe);
 // { [Function allocMe] &#39;0&#39;: 0, &#39;1&#39;: 0, &#39;2&#39;: 0 }
 </code></pre><p>v8 does not support allocating external array data to an Array, and if passed
 will throw.</p>
-<p>It&#39;s possible is to specify the type of external array data you would like. All
+<p>It&#39;s possible to specify the type of external array data you would like. All
 possible options are listed in <code>smalloc.Types</code>. Example usage:</p>
 <pre><code>var doubleArr = smalloc.alloc(3, smalloc.Types.Double);
 
