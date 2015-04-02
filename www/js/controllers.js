@@ -8,6 +8,7 @@ angular.module('starter.controllers', [])
 
 .controller('stableCtrl', function($scope, $stateParams, $state, $rootScope) {
   $scope.page = 'templates/stable/' + $stateParams.page + '.html';
+  $scope.title = $stateParams.page.capitalize();
   $rootScope.loaded = function() {
     init();
   };
