@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.mc.nad" version="0.12.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mc.nad" version="0.12.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Node.js Documentation Free</name>
   <description>Node.js Manual and Documentation Offline</description>
   <author email="info@dak42.com" href="http://dak42.github.io/node-documentation/">dak42</author>
