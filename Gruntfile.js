@@ -1,6 +1,6 @@
 'use strict';
 
-var versionStable = '0.12.2';
+var versionStable = '0.12.3';
 
 module.exports = function(grunt) {
   // Project configuration.
